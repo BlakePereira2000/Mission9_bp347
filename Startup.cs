@@ -28,10 +28,13 @@ namespace BookStore
         {
             services.AddControllersWithViews();
 
+            // making a connection string
             services.AddDbContext<BookstoreContext>(options =>
             {
                 options.UseSqlite(Configuration["ConnectionStrings:StoreDBConnection"]);
             });
+            //each HTTP request gets it own context file
+            services.AddScoped<IBookStoreRepository, EFBookStoreReopsitory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

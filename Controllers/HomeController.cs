@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.Models;
+using BookStore.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +10,36 @@ namespace BookStore.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IBookStoreRepository repo;
+
+        public HomeController (IBookStoreRepository temp)
         {
-            return View();
+            repo = temp;
         }
+        public IActionResult Index(int pageNum = 1)
+        {
+            int pageSize = 5;
+
+            //load page and book info
+            var x = new BooksViewModel
+            {
+
+                Books = repo.Books
+                .OrderBy(b => b.Title)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBooks = repo.Books.Count(),
+                    BooksPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
+        }
+
+
     }
 }
