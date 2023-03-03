@@ -13,6 +13,6 @@ namespace BookStore.Models.ViewModels
 
         // figure out pages needed
 
-        public int TotalPages => (int) Math.Ceiling((double)TotalNumBooks / BooksPerPage);
+        public int TotalPages => (int) Math.Ceiling((double) TotalNumBooks / BooksPerPage);
     }
 }
