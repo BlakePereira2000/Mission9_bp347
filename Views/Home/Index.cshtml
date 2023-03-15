@@ -9,25 +9,7 @@
 <!-- writing a recursive page to display only pages that have 10 books-->
 @foreach (Book b in Model.Books)
 {
-<div class="card card-outline-primary m-1 p-1">
-    <div class="bg-faded p-1">
-        <h4>
-            @b.Title
-            <span class="badge badge-pill badge-primary" style="float:right; background-color: #FFC0CB;">
-                <small>@b.Price.ToString("c")</small>
-            </span>
-        </h4>
-    </div>
-    <div class="card-text p-1">@b.Category</div>
-
-    <ul>
-        <li>Author: @b.Author </li>
-        <li>Publisher: @b.Publisher </li>
-        <li>ISBN: @b.Isbn </li>
-        <li>Classification: @b.Classification </li>
-        <li>Number of Pages: @b.PageCount </li>
-    </ul>
-</div>
+    <partial name="BookSummary" model="b"/>
 }
 <!--Making links to the next set of pages to diplay the rest of the database-->
 <div page-blah="@Model.PageInfo" page-action="Index"
