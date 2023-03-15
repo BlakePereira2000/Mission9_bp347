@@ -20,21 +20,25 @@ namespace BookStore.Pages
         }
         //
         public Basket basket { get; set; }
-        public void OnGet()
+        public string ReturnUrl { get; set; }
+        public void OnGet(string returnUrl)
         {
+            ReturnUrl = returnUrl ?? "/";
+            // looks for an entry that says 'basket' and pulls it
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
         // creating a post request so that information can be passed to through the form
-        public IActionResult onPost(int bookId)
+        public IActionResult OnPost(int bookId, string returnUrl)
         {
+
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookId);
 
             basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
-            basket.AddItem(b, 1);
+            basket.AddItem(b, 1, b.Price);
 
             HttpContext.Session.SetJson("basket", basket);
 
-            return RedirectToPage();
+            return RedirectToPage( new {ReturnUrl = returnUrl});
         }
     }
 }

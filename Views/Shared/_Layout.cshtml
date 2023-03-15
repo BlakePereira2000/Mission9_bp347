@@ -6,19 +6,36 @@
     <title>@ViewBag.Title</title>
     <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body>
+<!-- I added in a light background to go along with the theme -->
+<body class="bg-light">
     <div class="bg-dark text-white p-2">
         <span class="navbar-brand ml-2">BOOK STORE</span>
     </div>
 
     <div class="row m-1 p-1">
 
-        <div id="types" class="col-3">
+        <div id="types" class="col-4">
             <vc:types-view-components></vc:types-view-components>
         </div>
 
-        <div class="col-9">
+        <div class="col-4">
             @RenderBody()
+        </div>
+        <!-- I added a new column and a thumbnail picture to eventually add a link to the book from the pictures-->
+        <div class="col-4">
+            <h2 class="text-center ml-2">Popular Books</h2>
+            <div class="thumbnail">
+                <img src="/lib/Pictures/Ulysses.jpg" class="img-thumbnail" alt="American Ulysses">
+                <div class="caption text-center">
+                    <p>American Ulysses</p>
+                </div>
+            </div>
+            <div class="thumbnail">
+                <img src="/lib/Pictures/DeepWork.jpg" class="img-thumbnail" alt="Deep Work">
+                <div class="caption text-center">
+                    <p>Deep Work</p>
+                </div>
+            </div>
         </div>
 
     </div>

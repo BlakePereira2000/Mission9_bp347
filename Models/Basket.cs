@@ -10,7 +10,7 @@ namespace BookStore.Models
         // this creates a list of books in the cart
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
 
-        public void AddItem (Book book, int qty)
+        public void AddItem (Book book, int qty, double price)
         {
             BasketLineItem line = Items
                 .Where(b => b.Book.BookId == book.BookId).FirstOrDefault();
@@ -21,7 +21,8 @@ namespace BookStore.Models
                 Items.Add(new BasketLineItem
                 {
                     Book = book,
-                    Quantity = qty
+                    Quantity = qty,
+                    Price = price
                 });
             }
             else
@@ -32,8 +33,8 @@ namespace BookStore.Models
         }
         public double CalculateTotal()
         {
-            double cost = 10.00;
-            double sum = Items.Sum(x => x.Quantity * cost);
+
+            double sum = Items.Sum(x => x.Quantity * x.Price);
 
             return sum;
         }
@@ -44,5 +45,6 @@ namespace BookStore.Models
         public int LineID { get; set; }
         public Book Book { get; set; }
         public int Quantity { get; set; }
+        public double Price { get; set; }
     }
 }
