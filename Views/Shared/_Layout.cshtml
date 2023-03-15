@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="~/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/lib/font-awesome/css/all.min.css" rel="stylesheet" />
 </head>
 <!-- I added in a light background to go along with the theme -->
 <body class="bg-light">
     <div class="bg-dark text-white p-2">
-        <span class="navbar-brand ml-2">BOOK STORE</span>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col navbar-brand">SPORTS STORE</div>
+                <div class="col-6 text-end">
+                    <vc:basket-summary />
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row m-1 p-1">

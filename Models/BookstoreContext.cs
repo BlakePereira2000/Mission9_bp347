@@ -20,6 +20,8 @@ namespace BookStore.Models
         }
 
         public DbSet<Book> Books { get; set; }
+        //allow migrations to know about the Payments dataset
+        public DbSet<Pay> Payments { get; set; }
 
     }
 }

@@ -34,12 +34,17 @@ namespace BookStore
                 options.UseSqlite(Configuration["ConnectionStrings:StoreDBConnection"]);
             });
             //each HTTP request gets it own context file
+            // this allows for the view pages to access the repositories 
             services.AddScoped<IBookStoreRepository, EFBookStoreReopsitory>();
+            services.AddScoped<IPayRepository, EFPayRepository>();
 
             services.AddRazorPages();
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
